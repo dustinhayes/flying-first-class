@@ -68,15 +68,15 @@ The ability to call functions from within other functions is, in my opinion, the
 var array = [1, 2, 3];
 
 array.forEach(function (elm, ind, arr) {
-    console.log(elm, 'is at', ind, 'in', arr);
+    console.log(elm, 'is at index', ind, 'in', arr);
 });
-// 1 "is at" 0 "in" [1, 2, 3]
-// 2 "is at" 1 "in" [1, 2, 3]
-// 3 "is at" 2 "in" [1, 2, 3]
+// 1 "is at index" 0 "in" [1, 2, 3]
+// 2 "is at index" 1 "in" [1, 2, 3]
+// 3 "is at index" 2 "in" [1, 2, 3]
 ```
 
 ### Implementation
-Remember `this` is equal to the array `forEach()` was called on.
+Remember, `this` is equal to the array `forEach()` was called on.
 ```javascript
 Array.prototype.forEach = function forEach(func) {
     
@@ -92,11 +92,10 @@ Array.prototype.forEach = function forEach(func) {
 };
 ```
 
-The example above clarifies the common question, "Where did these arguments come from". When you supply `forEach` a function to execute, it sets up the parameters the supplied function will be executed with by calling that function with those parameters.
-
+The example above clarifies the common question, "Where did these arguments come from?". When you supply `forEach` a function to execute, it sets up the parameters that will be supplied to the function passed in.
 
 ## More Power with Call and Apply
-Each function you create comes with two methods (functions as properties), `call` and `apply`. These methods almost do the same thing. They both allow you to execute a function, provide what `this` will equal within that function, and supply any parameters that function expects. The difference is in the parameter end of things. For `call`, the parameters are supplied as a comma separated list, as you are used to doing. `apply`, on the other hand is supplied a single array as a parameter list, which gets expanded into individual parameters.
+Each function you create comes with two methods (functions as object properties), `call` and `apply`. These methods almost do the same thing. They both allow you to execute a function, provide what `this` will equal within that function, and supply any parameters the function expects. The difference is in the parameter end of things. For `call`, the parameters are supplied as a comma separated list, as you are used to doing. `apply`, on the other hand is supplied a single array as a parameter list, which gets expanded into individual parameters.
 
 ### Signature
 ```javascript
@@ -146,11 +145,11 @@ Array.prototype.forEach = function forEach(func, this_val) {
 var array = [1, 2, 3];
 
 array.forEach(function (elm, ind) {
-    console.log(elm, 'is at', ind, 'in', this);
+    console.log(elm, 'is at index', ind, 'in', this);
 }, array);
-// 1 "is at" 0 "in" [1, 2, 3]
-// 2 "is at" 1 "in" [1, 2, 3]
-// 3 "is at" 2 "in" [1, 2, 3]
+// 1 "is at index" 0 "in" [1, 2, 3]
+// 2 "is at index" 1 "in" [1, 2, 3]
+// 3 "is at index" 2 "in" [1, 2, 3]
 ```
 
 ### Partial Application
